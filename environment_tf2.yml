@@ -1,0 +1,17 @@
+name: ehr_tf2
+channels:
+  - conda-forge
+  - bioconda
+  - anaconda
+dependencies:
+  - python=3.7
+  - numpy>=1.18.4
+  - scipy>=1.4.1
+  - scikit-learn>=0.23.0
+  - pandas>=1.0.3
+  - pyarrow>=0.17.0          # conflicts with Ray
+  - tensorflow-gpu>=2.1.0
+  - plac>=0.9.6,<1.2.0
+  - tqdm>=4.38.0,<5.0.0
+  - lz4
+  - spacy>=2.2.4,<2.3.0

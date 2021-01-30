@@ -1,0 +1,26 @@
+{
+  "lang":"en",
+  "name":"mgb_fasttext_200k",
+  "version":"0.0.1",
+  "spacy_version":">=2.2.4",
+  "description":"",
+  "author":"",
+  "email":"",
+  "url":"",
+  "license":"",
+  "vectors":{
+    "width":100,
+    "vectors":200000,
+    "keys":1667034,
+    "name":"mgb_fasttext_200k.vectors"
+  },
+  "pipeline":[
+
+  ],
+  "factories":{
+
+  },
+  "labels":{
+
+  }
+}

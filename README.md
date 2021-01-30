@@ -1,69 +1,49 @@
-# EHR-automatic-event-adjudication
+# ehr_classification
 
-## System requirement
-### The codes were tested in the following environment
-OS: Ubuntu 18.04
+## Getting started
 
-Required software
+Create and activate and environment, download [SpaCy](https://spacy.io) language models if you want to do more than
+ tokenization. Finally install the `ehr_classification` package.
+ 
 ```
-python 3.7.7
-tensorflow 2.2.0
-tensorflow-addons 0.10.0
-```
-For a complete list of python packages see `requirements.txt` file
-## How to run
-Installation of python dependencies
-```
-pip install -r requirements.txt
-```
-Installation of the echoAI-PET-measurements module
-into the virtual environment (e.g. conda, virtualenv or pipenv)
-```
+# create a conda environment
+conda env create -f environment_tf2.yml
+conda activate ehr_tf2
+
+#  download spacy models
+python -m spacy download en_core_web_sm
+
+# install the package in develop mode
+cd ehr_classification
 python setup.py develop
 ```
-Now the main function that runs the model can be imported 
-```
-import numpy as np
-from echoai_pet_measurements.runCFRModel import runCFRModel
-```
-An echocardiography video can be loaded into the memory as a numpy array
-```
-# Load video data into memory
-with open(datafile, 'rb') as f:
-    data = np.load(f)
 
-# Provide frame time (in ms) and image scaling factors
-frame_time_ms = 30
-deltaX = 0.03667
-deltaY = 0.03367
-```
-Inference on the echocardiography video by calling the runCFRModel function
-```
-_, predictions = runCFRModel(data_array_list=[data],
-                             frame_time_ms_list=[frame_time_ms],
-                             deltaX_list=[deltaX],
-                             deltaY_list=[deltaY])
-```
-Estimated time for 
-running the code on a single echo input: 5.4 seconds.
+## Usage
+Once the package is installed, two commands for the classification of medical notes are available in the conda environment.
 
-If no weights are available, a new model with random weights is initialized.
-However, checkpoint files can be provided to the *runCFRModel* function in the
-form of a python dictionary, where
-```
-checkpoint_dict = {'model_response_variable': 'path_to_checkpoint_file'}
-```
- 
-Moreover, multiple videos can be provided to this function as lists. 
-The returned *qualified_index_list* contains the video indices of those
-videos that satisfied the minimum requirements (maximum frame_time
-and minimum length).
+### tokenize
+Takes parquet file or directory and writes tokenized text to output file.
+Expects a `NoteTXT` column that contains the medical note text, this will be tokenized mapped to word vectors.
 
+```bash
+# To tokenize into text files (e.g. to train embeddings), do:
+tokenize text.parquet text.txt
+
+#To tokenize and map to features (numpy array) do:
+tokenize text.parquet no_out -b
 ```
-qualified_index_list, predictions = runCFRModel(data_array_list, 
-                                                frame_time_ms_list, 
-                                                deltaX_list, 
-                                                deltaY_list, 
-                                                checkpoint_dict,
-                                                batch_size=1)
+
+
+### predict_ehr
+Does forward pass using trained language models and outputs predictions.
+We trained event and history models for application on discharge summaries and progress notes.
+The parallelized commands below expect tokenized input from the previous step.
+
+```bash
+# tokenize and predict a single parquet file (or multiple parquet files)
+predict_ehr -t event output_folder text1.parquet text2.parquet ... textn.parquet
+
+# run in parallel with 4 gpus on a single machine, using files that have been tokenized before:
+parallel -j 4 predict_ehr . -t event -g {%} -s 1 -i pickle {} ::: *.pic.lz4
+parallel -j 4 predict_ehr . -t history -g {%} -s 1 -i pickle {} ::: *.pic.lz4
 ```
