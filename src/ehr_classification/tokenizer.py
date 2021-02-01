@@ -27,6 +27,7 @@ def read_abbreviations():
 
 # read in tokenizer exceptions
 def get_custom_tokenizer(model):
+    print(f"Loading Spacy model: {model}")
     nlp = spacy.load(model)
     abbrevs = read_abbreviations()
     tokenizer = nlp.Defaults.create_tokenizer(nlp)
@@ -95,25 +96,26 @@ def main(input_path, output_path,
          binary: ('convert to binary token vector', 'flag', 'b'),
          uncased: ('convert to uncased', 'flag', 'u'),
          maxlen: ('max len for binary vector', 'option', 'l') = 2000,
-         vectors: ('word vectors', 'option', 'v') = '/mnt/obi0/phi/ehr/word_vectors/filtered_20-05-23.bigram'):
+         word_vectors: ('word vectors', 'option', 'w') = '/mnt/obi0/phi/ehr/word_vectors/filtered_20-05-23.bigram'):
     """Takes parquet file or directory and writes tokenized text to output file.
 
-    To tokenize into text files (e.g. to train embeddings), do:
-    tokenize debug_0.parquet debug_0.txt
+    # To tokenize into text files (e.g. to train embeddings), do:
+    tokenize --word_vectors en_core_web_lg simulated_notes/simulated_notes.parquet simulated_notes/simulated_notes_tokenized.txt
 
-    To tokenize and map to features (numpy array) do:
-    tokenize debug_0.parquet no_out -b
+    # To tokenize and map to features (numpy array) use -b flag
+    # requires these columns in parquet file: ['PatientID', 'NoteID', 'ContactDTS', 'NoteTXT']
+    tokenize --word_vectors en_core_web_lg simulated_notes/simulated_notes.parquet no_out -b
 
-    To run multiple tokenization processes in parallel do:
-    parallel -j 10 tokenize -b {} no_out ::: *.parquet
+    # To run multiple tokenization processes in parallel do:
+    parallel -j 10 tokenize --word_vectors en_core_web_lg -b {} no_out ::: simulated_notes/*.parquet
 
     """
 
     if binary:
-        tokenize_and_map(input_path, vectors, maxlen)
+        tokenize_and_map(input_path, word_vectors, maxlen)
     else:
         # use tokenizer pipe
-        tokenizer = get_custom_tokenizer(vectors)
+        tokenizer = get_custom_tokenizer(word_vectors)
         with open(output_path, "a") as f:
             for doc in tqdm(tokenizer.pipe(read_input(input_path), batch_size=10000)):
                 if uncased:
@@ -123,8 +125,7 @@ def main(input_path, output_path,
                 f.write("\n")
 
 
-# TODO console entry point not working with plac
-def run():
+def main_():
     """Entry point for console_scripts
     """
     import plac
@@ -132,4 +133,4 @@ def run():
 
 
 if __name__ == "__main__":
-    run()
+    main_()

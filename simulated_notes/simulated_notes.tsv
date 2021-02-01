@@ -1,0 +1,21 @@
+	NoteTXT	Event_PCI	Event_ACS	Event_HF	Event_IS
+0	"Physician Discharge Summary    Patient Information   78 y.o.          Hospitalization Summary   Diagnoses: Unstable Angina
+Brief Summary/Assessment: 78yo F w/ h/o CAD s/p PCI to LAD presented to the ER with acute onset chest pain. She describes the pain as similar pain to the previous one that she experienced before the last PCI. The difference is that the pain did not resolve with rest this time. Hospital Course    Hospital Course:  HPI: Patient was in her usual state of health until this morning, when she suddenly felt pain in the chest, which was similar to the pain that she had before the last PCI. She sat down and rested for 15 min and realized that the pain was not getting better. She immediately called 911 and was brought to the ED.   On arrival to the ED, she still had chest pain at the same level. ECG showed elevated ST segment. The cath lab was consulted and she was transferred for CAG/PCI.
+CAG revealed total occlusion in the RCA #1. PCI was performed and a stent was placed.
+Her symptoms disappeared  after the procedure and the patient was in good condition until she was discharged."	1	1	0	0
+1	"Physician Discharge Summary  Patient Information  60 y.o.          Hospitalization Summary   Diagnoses: for PCI (stable)
+Brief Summary/Assessment: PCI was performed. RCA #1 75%->0% and a DES (XIENCE 2.5mm x 15 mm) was placed.
+Medication: Aspirin 100 mg/day, Clopidogrel 75 mg/day, atorvastatin 80 mg /day
+"	1	0	0	0
+2	"﻿Physician Discharge Summary  Patient Information  65 y.o.          Hospitalization Summary   Diagnoses: heart failure with reduced ejection fraction (HFrEF)
+Brief Summary/Assessment: 65yo M with a history of HTN, DCM (EF20%) and multiple hospitalization for decompensated HF. He presented to the ED with worsening of dyspnea from 7 days before. His SpO2 was decreased to 80% in room air at rest. BNP was elevated dramatically. Echocardiography was supportive of decompensated HFrEF with dilated IVC. He was hospitalized for HF treatment.
+Medication at hospitalization: Lasix 60 mg /day B.I.D., Carvedilol 80 mg B.I.D,
+# HFrEF: During the hospital course, he received IV flosemide (Lasix) and oxygen. His betablocker was initially stopped. At day 4, his SpO2 was 97% in room air. Echocardiography showed IVC diameter of 0.9 cm and EF 20%. BNP was decreased. The IV flosemide was changed Lasix 40mg P.O. and the betablocker was restarted. He was not on any ACEi so he was initiated on Enalapril. His symptoms continued to improve. The final echocardiography showed IVC diameter of 0.8 cm and EF 22% and he was discharged today.
+Medication: Lasix 80 mg /day B.I.D., Carvedilol 80 mg B.I.D, Enalapril 5.0 mg B.I.D. Lasix 20 mg use when weight increase.
+Measure weights every day. Take 20 mg Lasix if weights increase more than 2 lbs. Please contact me if have weight increase over 2 lbs, worsening of dyspnea or other symptoms that you think is suggestive of heat failure.
+"	0	0	1	0
+3	"Physician Discharge Summary  Patient Information  85 y.o.          Hospitalization Summary   Diagnoses: right MCA stroke.
+Brief Summary/Assessment: 85yo M with a history of AF and HTN. He presented to the ED with difficulty to move his left arm. The onset of symptom was 2 hour ago. He was prescribed Xarelto for AF but wasn't taking the medication because of nose bleeding.
+Neurology department was consulted and head CT was recommended. The CT revealed early signs of ischemia in the left hemisphere of the brain. MRI and MRA was further performed and right MCA stroke was confirmed. He was hospitalized and received t-PA.
+His course was uncomplicated with gradual improvement of the symptoms of the left arm. He was discharged on day 3.
+"	0	0	0	1

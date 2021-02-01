@@ -9,7 +9,7 @@ dependencies:
   - scipy>=1.4.1
   - scikit-learn>=0.23.0
   - pandas>=1.0.3
-  - pyarrow>=0.17.0          # conflicts with Ray
+  - pyarrow>=0.17.0
   - tensorflow-gpu>=2.1.0
   - plac>=0.9.6,<1.2.0
   - tqdm>=4.38.0,<5.0.0
